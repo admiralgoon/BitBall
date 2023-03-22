@@ -125,11 +125,11 @@ while True:
                                         self.HPbar = "[===--------]"
                                 if self.HP >= 10 and self.HP <= 20:
                                         self.HPbar = "[==---------]"
-                                        engine.say(self.HP)
+                                        engine.say(self.name+" isn't looking good.")
                                         engine.runAndWait()
                                 if self.HP >= 1 and self.HP <= 10:
                                         self.HPbar = "[=----------]"
-                                        engine.say(self.HP)
+                                        engine.say(self.name+" might not make it.")
                                         engine.runAndWait()
                                 if self.HP <= 0:
                                         self.HPbar = "[-----------]"
@@ -150,6 +150,7 @@ while True:
                                         engine.say(self.name)
                                         engine.runAndWait()
                                         engine.say("is fading.")
+                                        engine.runAndWait()
                                 
                         time.sleep(1)
 
@@ -242,7 +243,7 @@ while True:
                 if tipoff == False:
                         
                         print("A fight has broken out in the RuneBall Pit between",fighter1.name,"and",fighter2.name,"!" ,"\n")
-                        engine.say("A fight has broken out in the RuneBall Pit between"+fighter1.name+"and"+fighter2.name)
+                        engine.say("A fight has broken out in the RuneBall Pit between "+fighter1.name+" and "+fighter2.name)
                         engine.runAndWait()
                 time.sleep(1)
                 global swingcount
@@ -682,8 +683,6 @@ while True:
 
                                 #print(player1.inv ,"\n")
                                 print("...and found something. 🗡️" ,"\n")
-                                engine.say("...and found something.")
-                                engine.runAndWait()
                                 quality
                                 Player = player1
                                 wheel = ["X",Player.STR,Player.DEX,Player.WIS,Player.CHA,Player.MAG,Player.DMAG]
@@ -692,33 +691,44 @@ while True:
                                         
                                         Player.STR += gains
                                         print(Player.name,"finds a",quality,"power cell and feels a boost of energy!  🔺") ,"\n" 
+                                        engine.say(Player.name+ "finds a power cell.")
+                                        engine.runAndWait()
                                         
                                         time.sleep(1)
                                 if spin == 2:
                                         Player.DEX += gains
                                         print(Player.name,"finds a",quality,"drive kit and gets an idea! 🔺" ,"\n")
+                                        engine.say(Player.name+" finds a drive kit.")
+                                        engine.runAndWait()
                                         
                                         time.sleep(1)
                                 if spin == 3:
                                         Player.WIS += gains
                                         print(Player.name, "finds a",quality,"neurodoc chip and installs it. 🔺" ,"\n")
-                                        
+                                        engine.say(Player.name+" finds a neurodoc chip and installs it.")
+                                        engine.runAndWait()
+
                                         time.sleep(1)
                                 if spin == 4:
                                         Player.CHA += gains
                                         print(Player.name,"finds a",quality,"talisman and keeps spirit! 🔺" ,"\n")
+                                        engine.say(Player.name+" finds a talisman.")
+                                        engine.runAndWait()
                                         
                                         time.sleep(1)
                                 if spin == 5:
                                         Player.MAG += gains
                                         print(Player.name, "finds a",quality,"magicapsule container and imbibes the remainder of its contents. 🔺" ,"\n")
+                                        engine.say(Player.name+ " finds a magicapsule container and imbibes the remainder of its contents.")
+                                        engine.runAndWait()
                                         
                                         time.sleep(1)
                                 if spin == 6:
                                         Player.DMAG += gains
                                         print(Player.name, "finds a",quality,"modkit with a dark purpose. 🔺" ,"\n")
-                                        
-                                        time.sleep(1)        
+                                        engine.say(Player.name+" finds a modkit with a dark purpose.")
+                                        engine.runAndWait()
+                                                
                                         time.sleep(1)
 
                                 item = str(quality+"item")
@@ -1126,6 +1136,7 @@ while True:
                                 move = (len(Ordered)-1)
                                 Ordered.pop(move)
                                 return Ordered
+                        
                         #Conditions for tackles and fouls to occur
 
 
@@ -1138,34 +1149,34 @@ while True:
                                 time.sleep(1)
                                 player1.takedmg()
                                 time.sleep(1)
-                                #if player2.DMAG+dice_roll(20) > player1.WIS+dice_roll(20):
-                                item = []
-                                q = dice_roll(100)
-                                quality = ""
-                                if q >=0 and q <=80:
-                                        quality = "rusted"
-                
-                                if q >=81 and q <=95:
-                                        quality = "old"
+                                if player2.DMAG+dice_roll(20) > player1.WIS+dice_roll(20):
+                                        item = []
+                                        q = dice_roll(100)
+                                        quality = ""
+                                        if q >=0 and q <=80:
+                                                quality = "rusted"
+                        
+                                        if q >=81 and q <=95:
+                                                quality = "old"
+                                                
+                                        if q >=96 and q <=100:
+                                                quality = "used"
+                                        item = quality+"item"
+                                        inv = player1.inv
+                                        if item in inv:
+                                                inv.remove(item)
+                                                inv2 = player2.inv
+                                                print(player1.name+"'s inventory becomes lighter. ⏏️" ,"\n")
+                                                #print(inv ,"\n")
+                                                time.sleep(1)
+                                                if item not in inv2:
+                                                        inv2.append(item)
+                                                
+                                                
+                                                #print(inv2 ,"\n")
                                         
-                                if q >=96 and q <=100:
-                                        quality = "used"
-                                item = quality+"item"
-                                inv = player1.inv
-                                if item in inv:
-                                        inv.remove(item)
-                                        inv2 = player2.inv
-                                        print(player1.name+"'s inventory becomes lighter. ⏏️" ,"\n")
-                                        #print(inv ,"\n")
-                                        time.sleep(1)
-                                        if item not in inv2:
-                                                inv2.append(item)
-                                        
-                                        
-                                        #print(inv2 ,"\n")
-                                
-                                                print(player2.name+"'s inventory becomes heavier. 💎" ,"\n")
-                                                time.sleep(1) 
+                                                        print(player2.name+"'s inventory becomes heavier. 💎" ,"\n")
+                                                        time.sleep(1) 
 
                                 
                                 print("Hard to believe the referee let them get away with that one..." ,"\n")
@@ -1515,7 +1526,7 @@ while True:
                                                 TeamBPass+=1
                                                 
                                                 print("A nice interception for the",Team2.name+"!" ,"\n")
-                                                commentary = ("A nice interception for the",Team2.name+"!")
+                                                commentary = ("A nice interception for the "+Team2.name)
                                                 engine.say(commentary)
                                                 engine.runAndWait()
                                                 time.sleep(1)
@@ -1886,11 +1897,17 @@ while True:
                                         elif Aruncount==1:
                                                 
                                                 print("The",Team2.name,"look worried." ,"\n")
+                                                engine.say(Team2.name+" look worried." )
+                                                engine.runAndWait()
                                                 time.sleep(1)
                                                 Aruncount+=1
                                         elif Aruncount==2:
                                                 
                                                 print(Team2.name,"need to make a play to stop",player1.name,"!" ,"\n")
+                                                engine.say(Team2.name+" need to make a play to stop")
+                                                engine.runAndWait()
+                                                engine.say(player1.name)
+                                                engine.runAndWait()
                                                 time.sleep(1)
                                                 Aruncount+=1
                                         else:
@@ -1899,6 +1916,8 @@ while True:
                                                 # print("!A RUN TO THE MAX!" ,"\n")
                                                 
                                                 print(player2.name,"takes the ball and goes for the goal!" ,"\n")
+                                                engine.say(player2.name+ " takes the ball and goes for the goal!")
+                                                engine.runAndWait()
                                                 
                                                 print("The",Team2.name,"keeper braces." ,"\n")
                                                 commentary = ("The",Team2.name,"keeper braces.")
@@ -2022,10 +2041,16 @@ while True:
                                         elif Bruncount==1:
                                                 
                                                 print("The",Team1.name,"look worried." ,"\n")
+                                                engine.say(Team1.name+" look  worried")
+                                                engine.runAndWait()
                                                 Bruncount+=1
                                         elif Bruncount==2:
                                                 
                                                 print(Team1.name,"need to make a play to stop",player1.name,"!" ,"\n")
+                                                engine.say(Team1.name+"need to make a play to stop")
+                                                engine.runAndWait()
+                                                engine.say(player1.name)
+                                                engine.runAndWait()
                                                 Bruncount+=1
                                         else:   
                                                 time.sleep(1)
@@ -2033,6 +2058,7 @@ while True:
                                                 # print("!B RUN TO THE MAX!" ,"\n")
                                                 
                                                 print(player2.name,"takes the ball and goes for the goal!" ,"\n")
+                                                engine.say(player2.name+" takes the ball and goes for the goal!")
                                                 
                                                 print("The",Team1.name,"keeper braces." ,"\n")
                                                 commentary = ("The",Team1.name,"keeper braces.")
